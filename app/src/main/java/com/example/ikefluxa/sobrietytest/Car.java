@@ -28,7 +28,7 @@ public class Car {
         this.heightUpper = heightUpper * 2; // Upper height
         this.lengthLower = lengthLower * 2; // Lower length
         this.heightLower = heightLower * 2; // Lower height
-        this.wheelRad = wheelRad * 2; // Wheel radius
+        this.wheelRad = wheelRad; // Wheel radius
         this.speed = speed * 2; // Speed
         this.colour = colour; // Color
         this.y = (float) (Math.random() * 490 - this.wheelRad + 10 + this.heightLower + this.heightUpper + 45); // Y-coordinate
@@ -36,13 +36,13 @@ public class Car {
         this.timesPassed = 0; // Number of times gone across canvas
         this.alive = 1; // Whether car has been shot or not
     }
-    public Boolean hit(int mouseX, int mouseY) {
+    public Boolean hit(float mouseX, float mouseY) {
         if((mouseX < x + lengthLower / 2 && mouseX > x - lengthLower / 2 && mouseY < y && mouseY > y - heightLower) || (mouseX < x + lengthUpper / 2 && mouseX > x - lengthUpper / 2 && mouseY < y - heightLower&&mouseY > y - heightLower - heightUpper)){
             return true;
         }
         return false;
     }
-    public Boolean pop(int mouseX, int mouseY) {
+    public Boolean pop(float mouseX, float mouseY) {
         if((Constants.getDist(x + (lengthLower / 4), y, mouseX, mouseY) < wheelRad) || (Constants.getDist(x + (lengthLower / 4), y, mouseX, mouseY) < wheelRad)){
             return true;
         }
@@ -54,7 +54,8 @@ public class Car {
     public void reset() {
         if(x > Constants.SCREEN_WIDTH + Math.max(lengthLower / 2, (lengthLower / 4) + wheelRad / 2)) {
             x = -(Math.max(lengthLower / 2, (lengthLower / 4) + wheelRad / 2));
-            this.y = (float) (Math.random() * 490 - this.wheelRad + 10 + this.heightLower + this.heightUpper + 45); // Y-coordinate
+            y = (float) (Math.random() * 490 - this.wheelRad + 10 + this.heightLower + this.heightUpper + 45); // Y-coordinate
+            timesPassed ++;
         }
     }
     public void draw(Canvas canvas) {
@@ -67,5 +68,7 @@ public class Car {
         canvas.drawCircle(x - (lengthLower/4), y, wheelRad*2, paint);
         canvas.drawCircle(x + (lengthLower/4), y, wheelRad*2, paint);
         paint.setColor(Color.rgb(0, 0, 255));
+        paint.setTextSize(Constants.SCREEN_WIDTH / 20);
+        canvas.drawText(String.valueOf(timesPassed), x, y - heightLower - heightUpper-15, paint);
     }
 }
