@@ -1,4 +1,4 @@
-package com.example.ikefluxa.shootemup;
+package com.shoot.em.up;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;

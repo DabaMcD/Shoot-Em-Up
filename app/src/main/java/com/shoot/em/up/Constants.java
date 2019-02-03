@@ -1,4 +1,4 @@
-package com.example.ikefluxa.shootemup;
+package com.shoot.em.up;
 
 class Constants {
     static int SCREEN_WIDTH;

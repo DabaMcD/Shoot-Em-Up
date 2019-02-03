@@ -1,4 +1,4 @@
-package com.example.ikefluxa.shootemup;
+package com.shoot.em.up;
 
 import android.app.Activity;
 import android.os.Bundle;
