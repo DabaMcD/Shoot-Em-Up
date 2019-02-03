@@ -4,17 +4,13 @@ import android.graphics.Canvas;
 
 import java.util.ArrayList;
 
-/**
- * Created by Ike&Fluxa on 1/6/2018.
- */
+class Level {
+    private ArrayList<Car> cars;
 
-public class Level {
-    ArrayList<Car> cars;
-
-    public Level(ArrayList<Car> cars) {
+    Level(ArrayList<Car> cars) {
         this.cars = cars;
     }
-    public int run(Canvas canvas) { // return values: 2 = win, 1 = lose, 0 = still playing
+    int run(Canvas canvas) { // return values: 2 = win, 1 = lose, 0 = still playing
         int numCars = 0;
         for(Car car : cars) {
             if(car.alive == 1) {

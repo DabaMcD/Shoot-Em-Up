@@ -1,16 +1,12 @@
 package com.example.ikefluxa.shootemup;
 
-/**
- * Created by Ike&Fluxa on 1/5/2018.
- */
-
-public class Constants {
-    public static int SCREEN_WIDTH;
-    public static int SCREEN_HEIGHT;
-    public static Boolean mousePressed;
-    public static float mouseX;
-    public static float mouseY;
-    public static double getDist(float x1, float y1, float x2, float y2) {
+class Constants {
+    static int SCREEN_WIDTH;
+    static int SCREEN_HEIGHT;
+    static Boolean mousePressed;
+    static float mouseX;
+    static float mouseY;
+    static double getDist(float x1, float y1, float x2, float y2) {
         return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 }

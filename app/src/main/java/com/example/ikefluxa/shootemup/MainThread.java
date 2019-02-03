@@ -3,23 +3,19 @@ package com.example.ikefluxa.shootemup;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-/**
- * Created by Ike&Fluxa on 1/5/2018.
- */
-
 public class MainThread extends Thread {
-    public static final int MAX_FPS = 30;
+    static final int MAX_FPS = 30;
     private double averageFPS;
     private SurfaceHolder surfaceHolder;
     private GameScreen gameScreen;
     private boolean running;
-    public static Canvas canvas;
+    static Canvas canvas;
 
-    public void setRunning(boolean running) {
+    void setRunning(boolean running) {
         this.running = running;
     }
 
-    public MainThread(SurfaceHolder surfaceHolder, GameScreen gameScreen) {
+    MainThread(SurfaceHolder surfaceHolder, GameScreen gameScreen) {
         super();
         this.surfaceHolder = surfaceHolder;
         this.gameScreen = gameScreen;
@@ -28,7 +24,7 @@ public class MainThread extends Thread {
     @Override
     public void run() {
         long startTime;
-        long timeMillis = 1000/MAX_FPS;
+        long timeMillis;
         long waitTime;
         int frameCount = 0;
         long totalTime = 0;
@@ -38,7 +34,6 @@ public class MainThread extends Thread {
             try {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
-                    this.gameScreen.update();
                     this.gameScreen.draw(canvas);
                 }
             } catch (Exception e) {

@@ -10,68 +10,17 @@ import android.view.SurfaceView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-/**
- * Created by Ike&Fluxa on 1/5/2018.
- */
+import java.util.Collections;
 
 public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
-    private String page = "main page";
-    private int money;
-    private ArrayList<Smoke> smoke;
-    private int lotsOfSmoke;
-    private int smokeNo;
-    private int exploded;
-    private int explodeX;
-    private int explodeY;
-    private int frozen;
-    private int freezeX;
-    private int freezeY;
-    private int carsFreeze;
-    private int carsFreezeNum;
-    private int moneyBonused;
-    private int moneyBonusX;
-    private int moneyBonusY;
     private int level;
-    private int carCount;
-    private int timesPassToLose;
-    private int moreCarLapsPrice;
-    private String storeBack;
-    private int carsGoSlower;
-    private int carsGoSlowerPrice;
-    private int bonusesComeMoreOften;
-    private String levelSelectBack;
     private ArrayList<Level> levels;
-    private ArrayList<Car> showCars;
     public GameScreen(Context context) {
         super(context);
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
-        money = 0;
-        smoke = new ArrayList<>();
-        lotsOfSmoke = 0;
-        smokeNo = 1;
-        exploded = 0;
-        explodeX = -200;
-        explodeY = (int) (Math.random() * 400 + 50);
-        frozen = 0;
-        freezeX = -200;
-        freezeY = (int) (Math.random() * 400 + 50);
-        carsFreeze = 0;
-        carsFreezeNum = 0;
-        moneyBonused = 0;
-        moneyBonusX = -200;
-        moneyBonusY = (int) (Math.random() * 400 + 50);
         level = 1;
-        carCount = 0;
-        timesPassToLose = 16;
-        moreCarLapsPrice = 300;
-        storeBack = "play";
-        carsGoSlower = 0;
-        carsGoSlowerPrice = 230;
-        bonusesComeMoreOften = 1;
-        levelSelectBack = "main page";
         levels = new ArrayList<Level>() {
             {
                 add(new Level(new ArrayList<>(Arrays.asList(new Car(60, 20, 100, 30, 15, 10, Color.rgb(255, 0, 0)),
@@ -95,7 +44,7 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
                 add(new Level(new ArrayList<>(Arrays.asList(new Car(20, 100, 40, 30, 30, 10, Color.rgb(0, 255, 255)),
                         new Car(20, 100, 40, 30, 30, 10, Color.rgb(255, 0, 255)),
                         new Car(20, 100, 40, 30, 30, 10, Color.rgb(255, 255, 0))))));
-                add(new Level(new ArrayList<>(Arrays.asList(new Car(40, 3, 250, 5, 50, 20, Color.rgb(255, 255, 255))))));
+                add(new Level(new ArrayList<>(Collections.singletonList(new Car(40, 3, 250, 5, 50, 20, Color.rgb(255, 255, 255))))));
                 add(new Level(new ArrayList<>(Arrays.asList(new Car(30, 10, 50, 20, 10, 5, Color.rgb(255, 0, 0)),
                         new Car(30, 10, 50, 20, 10, 5, Color.rgb(0, 255, 0)),
                         new Car(30, 10, 50, 20, 10, 5, Color.rgb(255, 0, 255)),
@@ -180,22 +129,16 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
                         new Car(2, 1, 2, 1, 2, 1, Color.rgb(255, 0, 0)),
                         new Car(2, 1, 2, 1, 2, 1, Color.rgb(255, 0, 0))))));
             }};
-        showCars = new ArrayList<Car>() {{
-            add(new Car(50, 20, 80, 30, 15, 0, Color.rgb(17, 255, 0)));
-            add(new Car(50, 20, 80, 30, 15, 0, Color.rgb(255, 94, 0)));
-            add(new Car(50, 20, 80, 30, 15, 0, Color.rgb(204, 0, 255)));
-            add(new Car(50, 20, 80, 30, 15, 0, Color.rgb(247, 255, 0)));
-        }};
-    }
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
     }
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         thread = new MainThread(getHolder(), this);
         thread.setRunning(true);
         thread.start();
+    }
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
     }
     public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
@@ -217,9 +160,6 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         }
         return true;
     }
-    public void update() {
-
-    }
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
@@ -228,8 +168,6 @@ public class GameScreen extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawRect(-1, -1, Constants.SCREEN_WIDTH + 1, Constants.SCREEN_HEIGHT + 1, paint);
         if(levels.get(level - 1).run(canvas) == 2) {
             level ++;
-        } else if(levels.get(level - 1).run(canvas) == 1) {
-            // Game over
         }
         Constants.mousePressed = false;
     }
