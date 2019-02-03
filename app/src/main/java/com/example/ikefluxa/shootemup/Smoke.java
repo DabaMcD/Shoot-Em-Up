@@ -1,4 +1,4 @@
-package com.example.ikefluxa.sobrietytest;
+package com.example.ikefluxa.shootemup;
 
 /**
  * Created by Ike&Fluxa on 1/5/2018.

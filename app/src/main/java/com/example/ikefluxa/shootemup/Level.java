@@ -1,4 +1,4 @@
-package com.example.ikefluxa.sobrietytest;
+package com.example.ikefluxa.shootemup;
 
 import android.graphics.Canvas;
 
